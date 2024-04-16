@@ -1,32 +1,42 @@
 const slides = [
-	{
-		"image":"slide1.jpg",
-		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
-	},
-	{
-		"image":"slide2.jpg",
-		"tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>"
-	},
-	{
-		"image":"slide3.jpg",
-		"tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>"
-	},
-	{
-		"image":"slide4.png",
-		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
-	}
+    {
+        "image":"slide1.jpg",
+        "tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
+    },
+    {
+        "image":"slide2.jpg",
+        "tagLine":"Tirages haute définition grand format <span>pour vos bureaux et events</span>"
+    },
+    {
+        "image":"slide3.jpg",
+        "tagLine":"Grand choix de couleurs <span>de CMJN aux pantones</span>"
+    },
+    {
+        "image":"slide4.png",
+        "tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
+    }
 ]
 
-const baliseFG = document.getElementById("fleche_gauche")
+let currentSlideIndex = 0;
+
+const baliseFG = document.getElementById("fleche_gauche");
 console.log(baliseFG);
 baliseFG.addEventListener("click", () => {
-	console.log("Vous avez cliqué sur la flèche gauche")
+  currentSlideIndex--;
+  if (currentSlideIndex < 0) {
+    currentSlideIndex = slides.length - 1;
+  }
+  changeSlide(currentSlideIndex);
 });
 
-const baliseFD = document.getElementById("fleche_droite")
+const baliseFD = document.getElementById("fleche_droite");
 console.log(baliseFD);
 baliseFD.addEventListener("click", () => {
-	console.log("Vous avez cliqué sur la flèche droite")
+  currentSlideIndex++;
+  if (currentSlideIndex >= slides.length) {
+    currentSlideIndex = 0;
+  }
+  changeSlide(currentSlideIndex);
 });
 
 // Sélectionnez les éléments HTML nécessaires
@@ -51,6 +61,8 @@ for (let i = 0; i < numberOfSlides; i++) {
 
     // Défilez vers la diapositive correspondante à l'aide de votre méthode actuelle
     // (par exemple, en utilisant le gestionnaire d'événements 'swipe' existant)
+    currentSlideIndex = i;
+    changeSlide(currentSlideIndex);
   });
 
   dotsContainer.appendChild(dot);
@@ -58,3 +70,23 @@ for (let i = 0; i < numberOfSlides; i++) {
 
 // Sélectionnez le premier point et ajoutez la classe 'dot_selected'
 dotsContainer.children[0].classList.add('dot_selected');
+
+function changeSlide(index) {
+  // Changez l'image
+  const mainImage = document.querySelector('.banner-img');
+  mainImage.src = `./assets/images/slideshow/slide${index}.jpg`;
+
+  // Changez le texte
+  const textElement = document.querySelector('p');
+  textElement.innerHTML = slides[index].tagLine;
+
+  // Changez le bullet point actif
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((dot, i) => {
+    if (i === index) {
+      dot.classList.add('dot_selected');
+    } else {
+      dot.classList.remove('dot_selected');
+    }
+  });
+}
