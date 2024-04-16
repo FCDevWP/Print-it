@@ -27,6 +27,7 @@ baliseFG.addEventListener("click", () => {
     currentSlideIndex = slides.length - 1;
   }
   changeSlide(currentSlideIndex);
+  console.log("Vous avez cliqué sur la flèche gauche");
 });
 
 const baliseFD = document.getElementById("fleche_droite");
@@ -37,6 +38,7 @@ baliseFD.addEventListener("click", () => {
     currentSlideIndex = 0;
   }
   changeSlide(currentSlideIndex);
+  console.log("Vous avez cliqué sur la flèche droite");
 });
 
 // Sélectionnez les éléments HTML nécessaires
@@ -89,4 +91,6 @@ function changeSlide(index) {
       dot.classList.remove('dot_selected');
     }
   });
+
+  console.log("Vous êtes sur la diapositive " + (index + 1));
 }
