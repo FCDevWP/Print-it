@@ -28,3 +28,33 @@ console.log(baliseFD);
 baliseFD.addEventListener("click", () => {
 	console.log("Vous avez cliqué sur la flèche droite")
 });
+
+// Sélectionnez les éléments HTML nécessaires
+const dotsContainer = document.querySelector('.dots');
+
+// Comptez le nombre d'éléments dans le tableau 'slides'
+const numberOfSlides = slides.length;
+
+// Créez dynamiquement les points
+for (let i = 0; i < numberOfSlides; i++) {
+  const dot = document.createElement('div');
+  dot.classList.add('dot');
+
+  // Ajoutez un gestionnaire d'événements pour gérer la sélection du point
+  dot.addEventListener('click', () => {
+    // Supprimez la classe 'dot_selected' des points précédemment sélectionnés
+    const previouslySelectedDot = dotsContainer.querySelector('.dot_selected');
+    previouslySelectedDot.classList.remove('dot_selected');
+
+    // Ajoutez la classe 'dot_selected' au point sélectionné
+    dot.classList.add('dot_selected');
+
+    // Défilez vers la diapositive correspondante à l'aide de votre méthode actuelle
+    // (par exemple, en utilisant le gestionnaire d'événements 'swipe' existant)
+  });
+
+  dotsContainer.appendChild(dot);
+}
+
+// Sélectionnez le premier point et ajoutez la classe 'dot_selected'
+dotsContainer.children[0].classList.add('dot_selected');
