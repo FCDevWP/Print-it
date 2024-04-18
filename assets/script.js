@@ -76,7 +76,7 @@ dotsContainer.children[0].classList.add('dot_selected');
 function changeSlide(index) {
   // Changez l'image
   const mainImage = document.querySelector('.banner-img');
-  mainImage.src = `./assets/images/slideshow/slide${index}.jpg`;
+  mainImage.src = `./assets/images/slideshow/slide${index + 1}.jpg`;
 
   // Changez le texte
   const textElement = document.querySelector('p');
